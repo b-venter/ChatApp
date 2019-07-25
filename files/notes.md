@@ -1,4 +1,4 @@
-Working with the folders in this directory and installing
+# Working with the folders in this directory and installing
 
 The "app" directory contains the webpages relating to the fully functioning Chat Application
   - the setup.sh script will:
@@ -15,16 +15,16 @@ The "app" directory will need to be copied to the running virtual machine via sc
 
 Running in Virtual Box:
   1. Create New...
-    A. Provide a unique name.
-    B. Specify openSUSE (64-bit).
-    C. Hard disk -> use an existing virtual hard disk folder.
-    D. Select the extracted .vmdk file.
-    E. Create
+    (A) Provide a unique name.
+    (B) Specify openSUSE (64-bit).
+    (C) Hard disk -> use an existing virtual hard disk folder.
+    (D) Select the extracted .vmdk file.
+    (E) Create
   2. Select the Settings of the newly created virtual machine -> Network: recommend setting it to Bridged Mode.
   3. Start the virtual machine and complete the first-run wizard
-    A. You can skip user creation, and just provide a root password.
+    (A) You can skip user creation, and just provide a root password.
   4. Login an determine IP address (set via DHCP) with "ip addr"
-    A. A static IP can be set via "yast" -> System -> Network settings
+    (A) A static IP can be set via "yast" -> System -> Network settings
   5. Copy the "app" directory with scp to the virtual machine (scp -r app/ root@ip.ad.re.ss:app/)
   6. SSH to the virtual machine, and cd to the "app/" directory.
   7. Run setup.sh (e.g. "sh setup.sh")
