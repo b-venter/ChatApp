@@ -16,7 +16,7 @@ The "app" directory will need to be copied to the running virtual machine via sc
 Running in Virtual Box:
   1. Create New...
     A. Provide a unique name.
-    B. Specify openSUSE (64-bit)
+    B. Specify openSUSE (64-bit).
     C. Hard disk -> use an existing virtual hard disk folder.
     D. Select the extracted .vmdk file.
     E. Create
