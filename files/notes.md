@@ -1,3 +1,5 @@
+Working with the folders in this directory and installing
+
 The "app" directory contains the webpages relating to the fully functioning Chat Application
   - the setup.sh script will:
     + Set the host name to "chatappsrv".
