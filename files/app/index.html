@@ -20,6 +20,20 @@ html, body {
     font-size: calc(5vw + 1vh);
     text-align: center;
 }
+
+.settings{
+ position: fixed;
+ bottom: 8px;
+ right: 20px;
+ color: #f56642;
+ text-decoration: none;
+}
+
+.settings:hover{
+ background-color: #f56642;
+ color: #f5b942;
+}
+        
 a {
    color: #f56642;
    text-decoration: none;
@@ -30,6 +44,7 @@ a:hover {
    background-color: #f56642;
    color: #f5b942;
 }
+
 </style>
 </head>
 <body>
@@ -37,5 +52,7 @@ a:hover {
         <a href="chat_login.php">Chat App</a><br><br>
         <a href="time.html">Clock</a>
     </div>
+    <div class="settings"><a href="./settings.php" class="settings">Settings</a></div>
+
 </body>
 </html>
