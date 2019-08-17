@@ -374,7 +374,7 @@ $link2->close();
 		var message_input = $('#message'); //user message text
 		var name_input = $('#name'); //user name
 		
-		if(message_input.val() == ""){ //empty name?
+		if(name_input.val() == ""){ //empty name?
 			alert("Enter your Name please!");
 			return;
 		}
