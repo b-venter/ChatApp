@@ -20,7 +20,7 @@ Running in Virtual Box:
     (C) Hard disk -> use an existing virtual hard disk folder.  
     (D) Select the extracted .vmdk file.  
     (E) Create  
-  2. Select the <b>Settings</b> of the newly created virtual machine -> Network: recommend setting it to <u>Bridged Mode</u>.
+  2. Select the <b>Settings</b> of the newly created virtual machine -> Network: recommend setting it to <i>"Bridged Mode"</i>.
   3. Start the virtual machine and complete the first-run wizard  
     (A) You can skip user creation, and just provide a root password.  
   4. Login an determine IP address (set via DHCP) with "ip addr".  
