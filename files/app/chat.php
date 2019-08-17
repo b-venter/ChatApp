@@ -222,11 +222,15 @@ $link2->close();
 
 		switch(res_type){
 			case 'usermsg':
+				if (user_message !== null){
 				msgBox.append('<div><span class="date" style="color: black;">' + messg_date + '</span><span class="user_name" style="color:' + user_color + '">' + user_name + '</span> : <span class="user_message">' + user_message + '</span></div>');
 				break;
+				}
 			case 'system':
+				if (user_message !== null){
 				msgBox.append('<div style="color:#bbbbbb">' + messg_date + ' ' + user_message + '</div>');
 				break;
+				}
 		}
 		msgBox[0].scrollTop = msgBox[0].scrollHeight; //scroll message 
 	};
