@@ -14,7 +14,8 @@ The "vm" directory contains a vmdk file of a pre-built openSUSE JeOS with all ne
 This can easily be run in VirtualBox or VMware ESXI.
 The "app" directory will need to be copied to the running virtual machine via scp, and the setup.sh script run to complete the install.
 
-Virtual Box example, sstarting with the creation of the virtual machine:
+
+Virtual Box example, starting with the creation of the virtual machine:
 <ol>
   <li> Create New...  </li>
     <ol>
