@@ -2,13 +2,14 @@
 
 The "app" directory contains the webpages relating to the fully functioning Chat Application
 The setup.sh script will:
-    + Set the host name to "chatappsrv".
-    + Move all files to the web server directory.
-    + Initiate the mysql and apache services.
-    + Initiate the two websocket services.
-    + Set the firewall requirements.
-    + Create the application's database.
-
+<ul>
+    <li>+ Set the host name to "chatappsrv".</li>
+    <li>+ Move all files to the web server directory.</li>
+    <li>+ Initiate the mysql and apache services.</li>
+    <li>+ Initiate the two websocket services.</li>
+    <li>+ Set the firewall requirements.</li>
+    <li>+ Create the application's database.</li>
+</ul>
 The "vm" directory contains a vmdk file of a pre-built openSUSE JeOS with all needed components.
 This can easily be run in VirtualBox or VMware ESXI.
 The "app" directory will need to be copied to the running virtual machine via scp, and the setup.sh script run to complete the install.
