@@ -35,7 +35,7 @@ while (true) {
 		
 		socket_getpeername($socket_new, $ip); //get ip address of connected socket
 		$response = mask(json_encode(array('type'=>'system', 'message'=>$ip.' connected'))); //prepare json data
-		send_message($response); //notify all users about new connection
+		//send_message($response); //notify all users about new connection - remove slashes to enable.
 		
 		//make room for new socket
 		$found_socket = array_search($socket, $changed);
@@ -76,7 +76,7 @@ while (true) {
 			
 			//notify all users about disconnected connection
 			$response = mask(json_encode(array('type'=>'system', 'message'=>$ip.' disconnected')));
-			send_message($response);
+			//send_message($response);//notify all users about disconnection - remove slashes to enable.
 		}
 	}
 }
