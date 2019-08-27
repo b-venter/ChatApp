@@ -34,3 +34,12 @@ Virtual Box example, starting with the creation of the virtual machine:
   <li> Run setup.sh (e.g. "sh setup.sh") </li>
   <li> When setup confirms it has completed, open http://chatappsrv. </li>
 </ol>
+
+<b>Static IP config</b>
+Use Yast to change Network to static, and assign a ststaic IP.
+#yast
+
+Edit /srv/www/htdocs/chat_init.php
+Comment out (using //) the line under //Auto detect:
+Remove comments from the line under //Example of specifying manually:
+Also set correct IP address in the quotation marks.
