@@ -189,10 +189,10 @@ $link2->close();
         websocket2 = new WebSocket(wsUri2);
 	
 	websocket.onopen = function(ev) { // connection is open 
-		msgBox.append('<div class="system_msg" style="color:#bbbbbb">Welcome to RC2018 AV Chat box!</div>'); //notify user
+		msgBox.append('<div class="system_msg" style="color:#bbbbbb">Welcome to RC2019 AV Chat box!</div>'); //notify user
 	}
         websocket2.onopen = function(ev) { // connection is open 
-                timerBox.append('<div class="system_msg" style="color:#bbbbbb">Welcome to RC2018 AV Coundown Timer!</div>'); //notify user
+                timerBox.append('<div class="system_msg" style="color:#bbbbbb">Welcome to RC2019 AV Coundown Timer!</div>'); //notify user
         }
         
         //Count down from server, presence management
@@ -218,7 +218,10 @@ $link2->close();
 		var user_message 	= response.message; //message text
 		var user_name 		= response.name; //user name
 		var user_color 		= response.color; //color
-		var messg_date		= new Date();
+		var d_date		= new Date();
+		var days		= ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+		var months		= ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+		var messg_date		= days[d_date.getDay()] + " " + months[d_date.getMonth()] + " " + d_date.getDate() + " " + d_date.getFullYear() + " " + d_date.getHours() + ":" + d_date.getMinutes() + ":" + d_date.getSeconds() + " ";
 
 		switch(res_type){
 			case 'usermsg':
