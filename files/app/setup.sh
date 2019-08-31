@@ -3,7 +3,8 @@ echo "Setting hostname chatappsrv..."
 hostnamectl set-hostname chatappsrv
 systemctl restart wicked.service
 
-
+#Add entry to /etc/issue to see IP address
+echo "IP Address: \4{eth0}" >> /etc/issue
 
 systemctl enable mysql.service
 systemctl start mysql.service
