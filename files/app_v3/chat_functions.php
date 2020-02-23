@@ -60,9 +60,25 @@ class chatApp {
         return $output;
     }
     
+    
+    public function updateLanguage($language_old, $language_new) {
+        $link = $this->dblink;
+        if ($changelanguage = $link->prepare("UPDATE `presence` SET `language`=? WHERE `language`=?")) {
+            $changelanguage->bind_param("ss", $language_new, $language_old);
+            $changelanguage->execute();
+            $changelanguage->close();
+            $output = true;
+        } else {
+            $output = false;
+        }
+        
+        return $output;
+    }
+    
+    
     public function removeLanguage($language, $all = false){
         $link = $this->dblink;
-        if ($all = true) {
+        if ($all === true) {
             if ($del = $link->prepare("DELETE FROM `presence`")) {
                 $del->execute();
                 $del->close();
@@ -279,4 +295,6 @@ class chatSettings {
 //print_r($getbanner);
 //$toggle = $test->togglePresence("English");
 //print_r($toggle);
+//$update = $test->updateLanguage("English", "Eng");
+//print_r($update);
 ?>
