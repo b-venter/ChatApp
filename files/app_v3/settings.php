@@ -13,6 +13,9 @@ $settings = new chatSettings();
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Regional Convention Countdown Timer - Settings</title>
 <style type="text/css">
+img {
+    cursor: pointer;
+}
 </style>
 </head>
 
@@ -76,15 +79,13 @@ Countdown Banner: <input type='text' name='banner_countdown' value='<?php echo $
 <br><br>
 
 
-<!---SET LANGUAGES-->
+<!---GET/SET LANGUAGES-->
+<img src='add.png' title='Add' onclick='addLanguage()'> Set languages:<br>
 <?php
 $language_array = $app->getPresenceAll();
-print "<form id='lang_form' method='post'>";
 foreach ($language_array as $language => $state) {
-    print "<input type='text' name='input_$language' value='$language'><br>";
+    print "<input type='text' name='$language' value='$language' onchange='changeName(this.value, this.name)'><img src='delete.png' title='Delete' id='$language' onclick='delLanguage(this.id)'><br>";
 }
-print "<input type='submit' value='Submit'>";
-print "</form>";
 ?>
 <br><br>
 
@@ -109,6 +110,71 @@ Countdown Timer: <input type='text' name='timer_countdown' value='<?php echo $co
 <div id="timer_set"><?php echo "$timer2_error";?></div>
 <br><br>
 
+<script>
+function addLanguage(){
+    var k = prompt("Enter new language: ");
+    if (k != null) {
+    
+        var z = "db_settings.php";
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange=function() {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+            var response = xmlhttp.responseText;
+            if (response == true){
+                alert("Successfully changed! Please refresh screen.");
+            } else {
+                alert("Change failed!");
+            }
+        }
+        }
+        xmlhttp.open("POST",z,true);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlhttp.send("languageNew=" + k);
+    
+    }
+}
+
+function delLanguage(a){
+    var z = "db_settings.php";
+    var y = window.confirm("Delete " + a + "?"); //OK_Cancel prompt
+    if (y == true) {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange=function() {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+            var response = xmlhttp.responseText;
+            if (response == true){
+                alert("Successfully deleted! Please refresh screen.");
+            } else {
+                alert("Change failed!");
+            }
+        }
+        }
+        xmlhttp.open("POST",z,true);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlhttp.send("languageDel=" + a);
+    }
+}
+
+function changeName(x, y) {
+    var z = "db_settings.php";
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange=function() {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+            var response = xmlhttp.responseText;
+            if (response == true){
+                alert("Successfully changed!");
+            } else {
+                alert("Change failed!");
+            }
+        }
+    }
+    xmlhttp.open("POST",z,true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send("language1=" + x + "&language2=" + y);
+}
+
+
+</script>
 
 </body>
 </html>

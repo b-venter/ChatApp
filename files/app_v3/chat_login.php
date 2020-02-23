@@ -5,16 +5,21 @@
 <div class="login" align="center" style="max-height: 600px; overflow: auto; border: solid; max-width: 400px; margin: auto;">
 <a href='./index.html'>Home</a>
 <?php
+require_once('chat_init.php');
+include 'chat_functions.php';
+
+$app = new chatApp();
+$settings = new chatSettings();
+
+
 echo "<h2>Select your language and department below:</h2>";
 echo "<br>";
-echo "<a href=./chat.php?user=AF_Sound>Afrikaans - Sound</a><br><br>";
-echo "<a href=./chat.php?user=AF_Video>Afrikaans - Video</a><br><br>";
-echo "<a href=./chat.php?user=EN_Sound>English - Sound</a><br><br>";
-echo "<a href=./chat.php?user=EN_Video>English - Video</a><br><br>";
-echo "<a href=./chat.php?user=Kwangali>Kwangali</a><br><br>";
-echo "<a href=./chat.php?user=Kwanyama>Kwanyama</a><br><br>";
-echo "<a href=./chat.php?user=PT_Sound>Portuguese - Sound</a><br><br>";
-echo "<a href=./chat.php?user=PT_Video>Portuguese - Video</a><br><br>";
+
+$language_array = $app->getPresenceAll();
+foreach ($language_array as $language => $state) {
+    echo "<a href=./chat.php?user=".$language."_Sound>$language - Sound</a><br><br>";
+    echo "<a href=./chat.php?user=".$language."_Video>$language - Video</a><br><br>";
+}
 
 ?>
 </div>
