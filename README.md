@@ -2,6 +2,9 @@
 
 JW Regional Convention application that allows air-gapped instant messaging, synchronised countdown timer for simultaneous playing of media, and optional clock display for platforms.
 
+![image](https://github.com/b-venter/ChatApp/assets/52171108/b316a8ba-2a96-4c9e-b3db-39a1fc8a123c)
+
+
 The app is based on a LAMP stack alog with websockets. Deploying the application can be approached in two ways:
 1. Use the provided custom OS as a virtual machine (VM). It has all the apache, mariaDb and php packages required.
 2. Use a Linux OS of your choice. All package will ned to be instaleld manually. (I provide an example using openSUSE, but as this will vary between OSes - it is just a guide to find your local OS' equivalent packages)
