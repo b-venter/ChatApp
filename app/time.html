@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<script>
+
+function display_ct(){
+	//var d = new Date();
+	    //var x1 = d.getDay() + '/' + d.getMonth() +1 + '/' + d.getFullYear() + ' ' + d.toLocaleTimeString();
+	var url = 'clock2.php';
+	var xmlhttp2 = new XMLHttpRequest();
+	xmlhttp2.onreadystatechange=function() {
+		if (xmlhttp2.readyState==4 && xmlhttp2.status==200) {
+			var response = xmlhttp2.responseText;
+			document.getElementById('current_time').innerHTML = response;
+		}
+	}
+	xmlhttp2.open("GET",url,true);
+        xmlhttp2.send();
+	repeat = display_c();
+}
+
+function display_c(){
+	showclock = setTimeout('display_ct()', 1000)
+}
+
+</script>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<title>Regional Convention Clock</title>
+<style type="text/css">
+html, body { 
+    background-color: black;
+    height: 100%; 
+}
+
+#current_time {
+    width: 100%;
+    color: white;
+    font: arial;
+    font-size: calc(20vw + 10vh);
+    text-align: center;
+}
+</style>
+</head>
+<body onload="display_c()">
+<div id="current_time"></div>
+</body>
+</html>
