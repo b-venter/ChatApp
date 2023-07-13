@@ -23,7 +23,7 @@ The custom OS is available as a KVM/XEN, VMware and VirtualBox hard disk image f
 * Use the **vmdk** or convert the **qcow**.
 * Create a VM as per VMware or KVM
 * Recommend network adaptor is using *Bridge*
-
+#### Installing
  - Once the VM has been created, connect to it via console and complete the intial start wizard.
  - After the inital start wizard, you should see the IP address obtained via DHCP. This shows that the ethernet is working.
  - Login using `root` and the passwod you chose during the inital wizard.
@@ -51,7 +51,7 @@ This provides an example using the openSUSE OS.
 >sudo zypper in libaio1 libJudy1 libmariadb3 libodbc2 mariadb mariadb-client mariadb-errormessages python3-mysqlclient  
 >sudo zypper in mariadb-tools perl perl-DBD-mysql perl-DBI
 >sudo zypper in php7-sockets php7-json
-
+#### Installing
 With the necessary packages installed, you can follow similar steps as above:
  - copy the `app` folder to the VM, then run the following commands:
    >cd app/  
