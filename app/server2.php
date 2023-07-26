@@ -3,6 +3,9 @@
 require_once('chat_init.php');
 include 'chat_functions.php';
 
+$driver = new mysqli_driver();
+$driver -> report_mode = MYSQLI_REPORT_ALL;
+
 //Setup database
 $app = new chatApp();
 
@@ -50,48 +53,63 @@ while (true) {
 		while(socket_recv($changed_socket, $buf, 1024, 0) >= 1)
 		{
 			$received_text = unmask($buf); //unmask data
+			print "Log2::Raw data:\n";
+                        print_r($received_text);
+                        print "\n";
 			$tst_msg = json_decode($received_text, true); //json decode 
-			$user_type = $tst_msg['type']; //message type: timer vs presence
-			$user_name = $tst_msg['name']; //sender name
-			$user_message = $tst_msg['message']; //message text
-			$user_color = $tst_msg['color']; //color
+			print "Log2::Data received: \n";
+                        print_r($tst_msg);
+                        print "\n";
+			if (empty($tst_msg)) {
+                                print "Log2::Test data::Seems to be empty\n";
+                        } else {
+
+				$user_type = $tst_msg['type']; //message type: timer vs presence
+				$user_name = $tst_msg['name']; //sender name
+				$user_message = $tst_msg['message']; //message text
+				$user_color = $tst_msg['color']; //color
 			
 			
             
-            //PRESENCE CHANGE
-            //update DB if type = 'presence'
-            if ($user_type == 'presence') {
-                $dbpresence = $app->togglePresence($user_name);
-                //log success
-                //echo "Presence update (1 = success, 0 = fail): $dbpresence\n";
+	            		//PRESENCE CHANGE
+        	    		//update DB if type = 'presence'
+            			if ($user_type == 'presence') {
+                			$dbpresence = $app->togglePresence($user_name);
+                			//log success
+                			//echo "Presence update (1 = success, 0 = fail): $dbpresence\n";
+					print "Log2::Db Save presence::";
+                                        var_dump((bool) $dbpresence);
+                                        print "\n";
                 
-                //prepare data to be sent to client
-                $response_text = mask(json_encode(array('type'=>$user_type, 'name'=>$user_name, 'message'=>$user_message, 'color'=>$user_color)));
-                send_message($response_text); //send datac
-            } 
-            //TIMER
-            elseif ($user_type == 'timer') {
-                if (is_numeric($user_message)){
-                    for($i = $user_message; $i >= 0; $i--) {
-                    $countdown_message = $i;
-                    if ($countdown_message == 0) {
-                        $countdown_message = "PLAY";
-                    }
-                    //prepare data to be sent to client
-                    $response_text = mask(json_encode(array('type'=>$user_type, 'name'=>$user_name, 'message'=>$countdown_message, 'color'=>$user_color)));
-                    send_message($response_text); //send countdown value
+                			//prepare data to be sent to client
+                			$response_text = mask(json_encode(array('type'=>$user_type, 'name'=>$user_name, 'message'=>$user_message, 'color'=>$user_color)));
+                			send_message($response_text); //send datac
+            			} 
+            			//TIMER
+            			elseif ($user_type == 'timer') {
+                			if (is_numeric($user_message)){
+                    				for($i = $user_message; $i >= 0; $i--) {
+                    				$countdown_message = $i;
+                    				if ($countdown_message == 0) {
+                        				$countdown_message = "PLAY";
+                    				}
+                    				//prepare data to be sent to client
+                    				$response_text = mask(json_encode(array('type'=>$user_type, 'name'=>$user_name, 'message'=>$countdown_message, 'color'=>$user_color)));
+                    				send_message($response_text); //send countdown value
                     
-                    //log countdown
-                    //echo "$countdown_message\n";
+                    				//log countdown
+                    				//echo "$countdown_message\n";
                         
-                    sleep(1);
-                    }
-                } else {
-                    //prepare data to be sent to client
-                    $response_text = mask(json_encode(array('type'=>$user_type, 'name'=>$user_name, 'message'=>$user_message, 'color'=>$user_color)));
-                    send_message($response_text); //send countdown value
-                }
-            }
+                    				sleep(1);
+                    				}
+
+                			} else {
+						//prepare data to be sent to client
+                    				$response_text = mask(json_encode(array('type'=>$user_type, 'name'=>$user_name, 'message'=>$user_message, 'color'=>$user_color)));
+                    				send_message($response_text); //send countdown value
+                			}
+            			}
+			}
 			
 			break 2; //exist this loop
     }

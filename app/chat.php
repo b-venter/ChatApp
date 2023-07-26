@@ -141,8 +141,8 @@ print "</div>";
     foreach ($message_hist as list($a, $b, $c)) {
         print "<div>
         <span style='color: red'>$a</span>
-        <span style='color: magenta'>$b</span>
-        <span style='color:pink'> $c</span>
+        <span style='color: gray'>$b</span>
+        <span style='color: #C0C0C0'> $c</span>
         </div>";
     }
     ?>
@@ -163,7 +163,7 @@ print "</div>";
     <button id="start-timer">Start</button><button id="reset-timer">Reset</button><button id="stop-timer">Cancel</button>
 </div>
 
-<script src="./jquery-3.3.1.min.js"></script>
+<script src="./jquery-3.7.0.min.js"></script>
 <script language="javascript" type="text/javascript">  
 	//create a new WebSocket object.
 	var msgBox = $('#message-box');
@@ -365,7 +365,8 @@ print "</div>";
 			color : '<?php echo $colors[$color_pick]; ?>'
 		};
 		//convert and send data to server
-		websocket.send(JSON.stringify(msg));	
+		websocket.send(JSON.stringify(msg));
+		//console.log(JSON.stringify(msg));	
 		message_input.val(''); //reset message input      
     } 
 

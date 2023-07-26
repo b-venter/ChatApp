@@ -81,6 +81,8 @@ Countdown Banner: <input type='text' name='banner_countdown' value='<?php echo $
 
 <!---GET/SET LANGUAGES-->
 <img src='add.png' title='Add' onclick='addLanguage()'> Set languages:<br>
+(To edit a language: just click in language box > make your edit > click outside the box.<br>
+You will get a notification that the language is changed)<br>
 <?php
 $language_array = $app->getPresenceAll();
 foreach ($language_array as $language => $state) {
