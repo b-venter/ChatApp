@@ -84,5 +84,5 @@ There are two websocket servers running as services. You can view running errors
 Socket1 serves the instant messages. Socket2 serves the countdown timer and presence update.  
 Historical logs can also be viewed by running `sudo less /var/log/messages`.
 
-### Web page
+#### Web page
 View Apache2 and PHP errors with `sudo less /var/log/apache2/error_log`
