@@ -68,4 +68,5 @@ systemctl start myphpsocket1.service
 systemctl enable myphpsocket2.service
 systemctl start myphpsocket2.service
 
-echo echo "Setup completed. You can connect to this server on http://$(php -r 'echo gethostbyname(gethostname());')"
+echo "Setup completed. You can connect to this server on http://$(php -r 'echo gethostbyname(gethostname());')"
+echo "Please edit the server's IP address in /srv/www/htdocs/chat_init.php"
