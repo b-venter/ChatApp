@@ -50,7 +50,7 @@ This provides an example using the openSUSE OS.
 >sudo zypper in php8 php8-cli apache2-mod_php8 php8-mysql php8-pdo  
 >sudo zypper in libaio1 libJudy1 libmariadb3 libodbc2 mariadb mariadb-client mariadb-errormessages python3-mysqlclient  
 >sudo zypper in mariadb-tools perl perl-DBD-mysql perl-DBI  
->sudo zypper in php7-json  
+>sudo zypper in php8-sockets  
 #### Installing
 With the necessary packages installed, you can follow similar steps as above:
  - copy the `app` folder to the VM, then run the following commands:
