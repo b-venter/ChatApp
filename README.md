@@ -44,13 +44,13 @@ See **Setup** below for next steps
 
 ### Linux OS general
 This provides an example using the openSUSE OS.  
->sudo zypper ref
->sudo zypper up
+>sudo zypper ref  
+>sudo zypper up  
 >sudo zypper in apache2 apache2-prefork apache2-utils libapr1 libapr-util1 libbrotlienc1 system-user-wwwrun  
->sudo zypper in php7 php7-cli apache2-mod_php7 php7-mysql php7-pdo
+>sudo zypper in php8 php8-cli apache2-mod_php8 php8-mysql php8-pdo  
 >sudo zypper in libaio1 libJudy1 libmariadb3 libodbc2 mariadb mariadb-client mariadb-errormessages python3-mysqlclient  
->sudo zypper in mariadb-tools perl perl-DBD-mysql perl-DBI
->sudo zypper in php7-sockets php7-json
+>sudo zypper in mariadb-tools perl perl-DBD-mysql perl-DBI  
+>sudo zypper in php7-json  
 #### Installing
 With the necessary packages installed, you can follow similar steps as above:
  - copy the `app` folder to the VM, then run the following commands:
