@@ -3,6 +3,9 @@
 require_once('chat_init.php');
 include 'chat_functions.php';
 
+$driver = new mysqli_driver();
+$driver -> report_mode = MYSQLI_REPORT_ALL;
+
 //Setup database
 $app = new chatApp();
 
@@ -51,28 +54,40 @@ while (true) {
 		while(socket_recv($changed_socket, $buf, 1024, 0) >= 1)
 		{
 			$received_text = unmask($buf); //unmask data
+			print "Log1::Raw data:\n";
+			print_r($received_text);
+			print "\n";
 			$tst_msg = json_decode($received_text, true); //json decode
-			$user_type = $tst_msg['type'];
-			$user_name = $tst_msg['name']; //sender name
-			$user_message = $tst_msg['message']; //message text
-			$user_color = $tst_msg['color']; //color
-			$date = $tst_msg['datex']; //date stamp
+			print "Log1::Data received: \n";
+			print_r($tst_msg);
+			print "\n";
+			if (empty($tst_msg)) { 
+				print "Log1::Test data::Seems to be empty\n"; 
+			} else {
+				$user_type = $tst_msg['type'];
+				$user_name = $tst_msg['name']; //sender name
+				$user_message = $tst_msg['message']; //message text
+				$user_color = $tst_msg['color']; //color
+				//$date = $tst_msg['datex'];
+				$date = 0; //Temp change
 			
-			if ($user_type == 'usermsg') {
-                //log data to database
-                $db_save = $app->setMessage($user_name, $user_message);
-			
-                //prepare data to be sent to client
-                $response_text = mask(json_encode(array('type'=>'usermsg', 'datex'=>$date, 'name'=>$user_name, 'message'=>$user_message, 'color'=>$user_color)));
-                send_message($response_text); //send data
-			
-			} elseif ($user_type == 'control') {
-                    //prepare data to be sent to client
-                    $response_text = mask(json_encode(array('type'=>'control', 'datex'=>$date, 'name'=>$user_name, 'message'=>$user_message, 'color'=>$user_color)));
-                    send_message($response_text); //send data
+				if ($user_type == 'usermsg') {
+					//log data to database
+					$db_save = $app->setMessage($user_name, $user_message);
+					print "Log1::Db Save message::";
+					var_dump((bool) $db_save);
+					print "\n";
+
+					//prepare data to be sent to client
+					$response_text = mask(json_encode(array('type'=>'usermsg', 'datex'=>$date, 'name'=>$user_name, 'message'=>$user_message, 'color'=>$user_color)));
+					send_message($response_text); //send data
+				} elseif ($user_type == 'control') {
+					//prepare data to be sent to client
+					$response_text = mask(json_encode(array('type'=>'control', 'datex'=>$date, 'name'=>$user_name, 'message'=>$user_message, 'color'=>$user_color)));
+					send_message($response_text); //send data
+				}
 			}
-			
-			break 2; //exist this loop
+				break 2; //exit this loop
 		}
 		
 		$buf = @socket_read($changed_socket, 1024, PHP_NORMAL_READ);
@@ -83,7 +98,7 @@ while (true) {
 			unset($clients[$found_socket]);
 			
 			//notify all users about disconnected connection
-			$response = mask(json_encode(array('type'=>'system', 'message'=>$ip.' disconnected')));
+			//$response = mask(json_encode(array('type'=>'system', 'message'=>$ip.' disconnected')));
 			//send_message($response);//notify all users about disconnection - remove slashes to enable.
 		}
 	}

@@ -6,14 +6,26 @@ class chatDB {
     
     //database connection
     public function __construct(){
-        include 'chat_init.php';
-        $mysqli_conn = new mysqli($link_server, $link_user, $link_passwd, $link_db);
-        $this->db = $mysqli_conn;
-
+        $this->connect();
     }
     
     public function __destruct(){
     }
+
+    public function connect(){
+	include 'chat_init.php';
+	$mysqli_conn = new mysqli($link_server, $link_user, $link_passwd, $link_db);
+        $this->db = $mysqli_conn;
+    }
+
+   public function disconnect(){
+	mysqli_close($this->db);
+   }
+
+   public function reconnect(){
+	$this->disconnect;
+	$this->connect;
+   }
     
     public function connection(){
         return $this->db;
@@ -24,15 +36,32 @@ class chatDB {
 
 class chatApp {
 
+    public $db;
     public $dblink;
 
     public function __construct(){
-        $db = new chatDB();
-        $link = $db->connection();
+        $this->db = new chatDB();
+        $link = $this->db->connection();
         $this->dblink = $link;
     }
     
     public function __destruct(){
+    }
+
+    //Test mysqli connection. Reset if necessary
+    //Function was introuduced to handle timeouts that occur over long running instances.
+    public function dbTest(){
+	$state = mysqli_ping($this->dblink); //Capturing to varibale allows us to print $state if we want to.
+	if(!$state) {
+		print "DB connection down\n";
+		$reset = $this->db->reconnect;
+		print "DB connection reset\n";
+		$link = $this->db->connection();
+        	$this->dblink = $link;
+		print "DB connection restored.\n";
+	} else {
+		print "Database connected";
+	}
     }
 
     //LANGUAGE
@@ -47,6 +76,7 @@ class chatApp {
     }
     
     public function setLanguages($language, $state) { //$state = 0 or 1
+	$this ->dbTest();
         $link = $this->dblink;
         if ($setlanguage = $link->prepare("INSERT INTO `presence`(`language`, `presence`) VALUES (?,?)")) {
             $setlanguage->bind_param("si", $language, $state);
@@ -62,6 +92,7 @@ class chatApp {
     
     
     public function updateLanguage($language_old, $language_new) {
+	$this ->dbTest();
         $link = $this->dblink;
         if ($changelanguage = $link->prepare("UPDATE `presence` SET `language`=? WHERE `language`=?")) {
             $changelanguage->bind_param("ss", $language_new, $language_old);
@@ -77,6 +108,7 @@ class chatApp {
     
     
     public function removeLanguage($language, $all = false){
+	$this ->dbTest();
         $link = $this->dblink;
         if ($all === true) {
             if ($del = $link->prepare("DELETE FROM `presence`")) {
@@ -108,6 +140,7 @@ class chatApp {
     // set - return true/false
     
     public function getPresenceAll() {
+	$this ->dbTest();
         $link = $this->dblink;
         if ($presence = $link->prepare("SELECT `language`, `presence` FROM `presence`")) {
             $presence->execute();
@@ -126,6 +159,7 @@ class chatApp {
     }
     
     public function getPresence($language) {
+	$this ->dbTest();
         $link = $this->dblink;
         if ($presence = $link->prepare("SELECT `presence` FROM `presence` WHERE `language` = ?")) {
             $presence->bind_param("s", $language);
@@ -143,6 +177,7 @@ class chatApp {
 
 
     public function setPresence($language, $state) {
+	$this ->dbTest();
         $link = $this->dblink;
         if ($presence = $link->prepare("UPDATE `presence` SET `presence` = ? WHERE `language` = ?")) {
             $presence->bind_param("is", $state, $language);
@@ -157,6 +192,7 @@ class chatApp {
     }
     
     public function togglePresence($language) {
+	$this ->dbTest();
         $link = $this->dblink;
         if ($presence = $link->prepare("UPDATE `presence` SET `presence` = !`presence` WHERE `language` = ?")) {
             $presence->bind_param("s", $language);
@@ -176,6 +212,7 @@ class chatApp {
     // delete - return true/false
     
     public function getMessageHistory(){
+	$this ->dbTest();
         $link = $this->dblink;
         $output = [];
         $message = $link->prepare("SELECT `sender`, `message`, DATE_FORMAT(`time`, '%Y-%m-%d %H:%i') AS `formatted_date` FROM `messages`");
@@ -193,6 +230,7 @@ class chatApp {
     }
     
     public function setMessage($user_name, $user_message){
+	$this ->dbTest();
         $link = $this->dblink;
         if ($message = $link->prepare("INSERT INTO `messages`(`time`, `sender`, `message`) VALUES (NOW(),?,?)")) {
             $message->bind_param("ss", $user_name, $user_message);
@@ -207,6 +245,7 @@ class chatApp {
     }
     
     public function clearMessageHistory(){
+	$this ->dbTest();
         $link = $this->dblink;
         if ($message = $link->prepare("DELETE FROM `messages`")) {
             $message->execute();
