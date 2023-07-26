@@ -77,3 +77,12 @@ If you want to use a custom user handle (Program Overseer, Platform, AV, etc), u
 In this example:
 * The chat app server has an IP address of *192.168.1.67*
 * The custom user handle is *Afrikaans_PO*
+
+### Troubleshooting
+#### Socket servers
+There are two websocket servers running as services. You can view running errors with the commands `sudo systemctl status myphpsocket1.service` and `sudo systemctl status myphpsocket2.service`.  
+Socket1 serves the instant messages. Socket2 serves the countdown timer and presence update.  
+Historical logs can also be viewed by running `sudo less /var/log/messages`.
+
+### Web page
+View Apache2 and PHP errors with `sudo less /var/log/apache2/error_log`
