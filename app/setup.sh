@@ -13,10 +13,10 @@ systemctl start mysql.service
 echo "MariaDB Service enabled and started..."
 
 echo "Enabling Apache2 and PHP..."
-a2enmod php7
+a2enmod php8
 systemctl enable apache2.service
 systemctl start apache2.service
-echo "PHP7 module added to Apache. Apache HTTP Service enabled and started..."
+echo "PHP8 module added to Apache. Apache HTTP Service enabled and started..."
 
 firewall-cmd --zone=public --add-port=80/tcp --permanent
 firewall-cmd --zone=public --add-port=9000/tcp --permanent
