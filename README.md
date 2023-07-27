@@ -31,7 +31,7 @@ The custom OS is available as a KVM/XEN, VMware and VirtualBox hard disk image f
    >useradd -m chat  
    >password chat
  - update the OS
-   >sudo zypper ref
+   >sudo zypper ref  
    >sudo zypper up  
  - copy the `app` folder to the VM, then run the following commands:
    >cd app/  
