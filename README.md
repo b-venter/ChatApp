@@ -33,7 +33,7 @@ The custom OS is available as a KVM/XEN, VMware and VirtualBox hard disk image f
  - update the OS
    >sudo zypper ref  
    >sudo zypper up  
- - copy the `app` folder to the VM, then run the following commands:
+ - copy the `app` folder to the VM, then run the following commands (or git clone):
    >cd app/  
    >sudo sh setup.sh
  - The script will install the services, firewall rules and MySQL database
@@ -53,7 +53,9 @@ This provides an example using the openSUSE OS.
 >sudo zypper in php8 php8-cli apache2-mod_php8 php8-mysql php8-pdo  
 >sudo zypper in libaio1 libJudy1 libmariadb3 libodbc2 mariadb mariadb-client mariadb-errormessages python3-mysqlclient  
 >sudo zypper in mariadb-tools perl perl-DBD-mysql perl-DBI  
->sudo zypper in php8-sockets  
+>sudo zypper in php8-sockets
+>sudo zypper in sudo
+>sudo zypper in git git-core libsha1detectcoll1 perl-Error perl-Git  
 #### Installing
 With the necessary packages installed, you can follow similar steps as above:
  - copy the `app` folder to the VM, then run the following commands:
